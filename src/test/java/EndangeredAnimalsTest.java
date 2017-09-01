@@ -45,7 +45,7 @@ public class EndangeredAnimalsTest {
 	}
 
 
-	// Saving animals into the database Test
+	// Saving endangered animals into the database Test
 	@Test
 	public void save_savesEndangeredAnimalsIntoTheDatabase_Animals() {
 		EndangeredAnimals testEndangeredAnimals = new EndangeredAnimals("Elephants", "Rahino", 10);
@@ -73,7 +73,7 @@ public class EndangeredAnimalsTest {
 		assertEquals(testEndangeredAnimals.getId(), savedEndangeredAnimal.getId());
 	}
 
-	// Finding animals based on thier ids
+	// Finding endangered animals based on thier ids
 	@Test
 	public void find_returnsEndangereAnimalsWithId_secondEndangeredAnimal() {
 		EndangeredAnimals firstEndangeredAnimal = new EndangeredAnimals("Elephants", "Lions", 10);

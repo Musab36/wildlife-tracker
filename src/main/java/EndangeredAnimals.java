@@ -8,7 +8,7 @@ public class EndangeredAnimals {
 	private int age;
 	private int id;
     
-    // Animals constructors
+    // Endangered Animals constructors
 	public EndangeredAnimals(String name, String health, int age) {
 		this.name = name;
 		this.health = health;
@@ -16,7 +16,7 @@ public class EndangeredAnimals {
 
 	}
     
-    // Getter methods for animal names
+    // Getter methods for endangered animal names
 	public String getName() {
 		return name;
 	}
@@ -25,11 +25,13 @@ public class EndangeredAnimals {
 	public int getId() {
 		return id;
 	}
-
+    
+    // Getter method for endangered animal's health
 	public String getHealth() {
 		return health;
 	}
-
+    
+    // Getter method for endangered animal's age
 	public int getAge() {
 		return age;
 	}
@@ -46,7 +48,7 @@ public class EndangeredAnimals {
     }
   }
     
-    // Saving animals into the database
+    // Saving endangered animals into the database
 	public void save() {
 		try(Connection con = DB.sql2o.open()) {
 			String sql = "INSERT INTO endangered_animals (name, health, age) VALUES (:name, :health, :age)";
@@ -67,7 +69,7 @@ public class EndangeredAnimals {
 		}
 	}
 
-		// Finding animals based on thier ids
+		// Finding endangered animals based on thier ids
 		public static EndangeredAnimals find(int id) {
 			try(Connection con = DB.sql2o.open()) {
 				String sql = "SELECT * FROM endangered_animals WHERE id=:id";
