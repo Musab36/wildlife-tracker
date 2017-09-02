@@ -1,0 +1,17 @@
+<h2> List of sightings</h2>
+
+#if ($sightings)
+<ul>
+#foreach ($sighting in $sightings)
+<li>Ranger's Name: $sighting.getRangerName()</li>
+<li>Animal's Name: $sighting.getName()</li>
+<p>Location: $sighting.getLocation()</p>
+#end
+</ul>
+#else
+<h3>Sorry, there are no Sightings available yet!</h3>
+#end
+
+<a href="/sightings-form">Report a Sighting</a>
+
+<a href="/">Home</a>

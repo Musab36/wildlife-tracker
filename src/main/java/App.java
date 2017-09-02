@@ -54,7 +54,7 @@ public class App {
 		return new ModelAndView(model, layout);
 	}, new VelocityTemplateEngine());
 
-	// Endangered animals route
+	// Endangered animals routes
 	get("/endangered-animals", (request, response) -> {
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("endangeredanimals", EndangeredAnimals.all());
@@ -90,6 +90,45 @@ public class App {
 	get("/endangered-animals-form", (request, response) -> {
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("template", "templates/endangered-animals-form.vtl");
+		return new ModelAndView(model, layout);
+	}, new VelocityTemplateEngine());
+
+	// Sightings routes
+	get("/sightings", (request, response) -> {
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("sightings", Sightings.all());
+		model.put("template", "templates/sightings.vtl");
+		return new ModelAndView(model, layout);
+	}, new VelocityTemplateEngine());
+
+	post("/sightings", (request, response) -> {
+		Map<String, Object> model = new HashMap<String, Object>();
+		ArrayList<Sightings> sightings = request.session().attribute("sightings");
+		if (sightings == null) {
+			sightings = new ArrayList<Sightings>();
+			request.session().attribute("sightings", sightings);
+		}
+
+		String name = request.queryParams("name");
+		String location = request.queryParams("location");
+		String rangerName = request.queryParams("rangerName");
+		Sightings newSightings = new Sightings(name, location, rangerName);
+		newSightings.save();
+		model.put("template", "templates/sightings-success.vtl");
+		return new ModelAndView(model, layout);
+	}, new VelocityTemplateEngine());
+
+	get("/sightings/:id", (request, response) -> {
+		Map<String, Object> model = new HashMap<String, Object>();
+		Sightings sightings = Sightings.find(Integer.parseInt(request.params(":id")));
+		model.put("sightings", sightings);
+		model.put("template", "templates/sightings.vtl");
+		return new ModelAndView(model, layout);
+	}, new VelocityTemplateEngine());
+
+	get("/sightings-form", (request, response) -> {
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("template", "templates/sightings-form.vtl");
 		return new ModelAndView(model, layout);
 	}, new VelocityTemplateEngine());
 }
