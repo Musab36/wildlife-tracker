@@ -1,0 +1,17 @@
+<h2> List of endangerd animals</h2>
+
+#if ($endangeredanimals)
+<ul>
+#foreach ($endangeredanimal in $endangeredanimals)
+<li>Name: $endangeredanimal.getName()</li>
+<p>Health: $endangeredanimal.getHealth()</p>
+<p>Age: $endangeredanimal.getAge()</p>
+#end
+</ul>
+#else
+<h3>Sorry, there are no endangered animals available yet!</h3>
+#end
+
+<a href="/endangered-animals-form">Add an endangered animal</a>
+
+<a href="/">Home</a>

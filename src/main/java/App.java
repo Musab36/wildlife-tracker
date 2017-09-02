@@ -53,5 +53,44 @@ public class App {
 		model.put("template", "templates/animals-form.vtl");
 		return new ModelAndView(model, layout);
 	}, new VelocityTemplateEngine());
+
+	// Endangered animals route
+	get("/endangered-animals", (request, response) -> {
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("endangeredanimals", EndangeredAnimals.all());
+		model.put("template", "templates/endangered-animals.vtl");
+		return new ModelAndView(model, layout);
+	}, new VelocityTemplateEngine());
+
+	post("/endangered-animals", (request, response) -> {
+		Map<String, Object> model = new HashMap<String, Object>();
+		ArrayList<EndangeredAnimals> endangeredanimals = request.session().attribute("endangeredanimals");
+		if (endangeredanimals == null) {
+			endangeredanimals = new ArrayList<EndangeredAnimals>();
+			request.session().attribute("endangeredanimals", endangeredanimals);
+		}
+
+		String name = request.queryParams("name");
+		String health = request.queryParams("health");
+		int age = Integer.parseInt(request.queryParams("age"));
+		EndangeredAnimals newEndangeredAnimals = new EndangeredAnimals(name, health, age);
+		newEndangeredAnimals.save();
+		model.put("template", "templates/endangered-animals-success.vtl");
+		return new ModelAndView(model, layout);
+	}, new VelocityTemplateEngine());
+
+	get("/endangered-animals/:id", (request, response) -> {
+		Map<String, Object> model = new HashMap<String, Object>();
+		EndangeredAnimals endangeredanimals = EndangeredAnimals.find(Integer.parseInt(request.params(":id")));
+		model.put("endangeredanimals", endangeredanimals);
+		model.put("template", "templates/endangered-animals.vtl");
+		return new ModelAndView(model, layout);
+	}, new VelocityTemplateEngine());
+
+	get("/endangered-animals-form", (request, response) -> {
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("template", "templates/endangered-animals-form.vtl");
+		return new ModelAndView(model, layout);
+	}, new VelocityTemplateEngine());
 }
 }
