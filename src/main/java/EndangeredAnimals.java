@@ -7,12 +7,17 @@ public class EndangeredAnimals {
 	private String health;
 	private int age;
 	private int id;
+	private int ageLevel;
+
+	public static final int MAX_AGE_LEVEL = 7;
+	public static final int MIN_ALL_LEVELS = 0;
     
     // Endangered Animals constructors
 	public EndangeredAnimals(String name, String health, int age) {
 		this.name = name;
 		this.health = health;
 		this.age = age;
+		this.ageLevel = MAX_AGE_LEVEL / 2;
 
 	}
     
@@ -34,6 +39,19 @@ public class EndangeredAnimals {
     // Getter method for endangered animal's age
 	public int getAge() {
 		return age;
+	}
+
+	// Getter method for constant age
+	public int getAgeLevel() {
+		return ageLevel;
+	}
+
+	// Exception
+	public void grow() {
+		if(ageLevel >= MAX_AGE_LEVEL) {
+			throw new UnsupportedOperationException("Invalid age! The above animal cannot be that old");
+		}
+		ageLevel++;
 	}
 
     // Overriding equals

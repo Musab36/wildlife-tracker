@@ -82,4 +82,31 @@ public class EndangeredAnimalsTest {
 		secondEndangeredAnimal.save();
 		assertEquals(EndangeredAnimals.find(secondEndangeredAnimal.getId()), secondEndangeredAnimal);
 	}
+
+	// Instantiating with constants
+	@Test
+	public void endangeredAnimals_instantiateWithHalfFullAgeLevel() {
+		EndangeredAnimals testEndangeredAnimals = new EndangeredAnimals("Elephants", "Rahino", 7);
+		assertEquals(testEndangeredAnimals.getAgeLevel(), (EndangeredAnimals.MAX_AGE_LEVEL / 2));
+	}
+
+	// Exceptions
+	@Test
+	public void endangeredAnimals_ageLevelCannotGoBeyondMaxValue() {
+		EndangeredAnimals testEndangeredAnimals = new EndangeredAnimals("Elephants", "Rahino", 7);
+		for(int i = EndangeredAnimals.MIN_ALL_LEVELS; i <= (EndangeredAnimals.MAX_AGE_LEVEL + 2); i++) {
+			try {
+			testEndangeredAnimals.grow();
+		} catch (UnsupportedOperationException exception) { }
+		}
+		assertTrue(testEndangeredAnimals.getAgeLevel() <= EndangeredAnimals.MAX_AGE_LEVEL);
+	}
+
+	@Test(expected = UnsupportedOperationException.class)
+	public void grow_throwsExceptionIfAgeLevelAtMaxValue() {
+		EndangeredAnimals testEndangeredAnimals = new EndangeredAnimals("Elephants", "Rahino", 7);
+		for(int i = EndangeredAnimals.MIN_ALL_LEVELS; i <= (EndangeredAnimals.MAX_AGE_LEVEL); i++) {
+			testEndangeredAnimals.grow();
+		}
+	}
 }

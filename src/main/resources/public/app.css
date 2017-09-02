@@ -33,3 +33,7 @@ p {
 	border-radius: 5px;
 	background-color: transparent;
 }
+h5 {
+	font-weight: bolder;
+	color: red;
+}
