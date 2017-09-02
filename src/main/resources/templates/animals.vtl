@@ -1,0 +1,15 @@
+<h2> List of animals</h2>
+
+#if ($animals)
+<ul>
+#foreach ($animal in $animals)
+<li>$animal.getName()</li>
+#end
+</ul>
+#else
+<h3>Sorry, there are no animals available yet!</h3>
+#end
+
+<a href="/animals-form">Add an animal</a>
+
+<a href="/">Home</a>
