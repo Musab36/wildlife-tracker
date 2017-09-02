@@ -19,3 +19,17 @@ body {
 	color: black;
 	background-color: white;
 }
+
+li {
+	color: red;
+}
+
+p {
+	color: blue;
+}
+
+.inputs {
+	width: 400px;
+	border-radius: 5px;
+	background-color: transparent;
+}
